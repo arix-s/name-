@@ -20,51 +20,67 @@
   font-family: var(--font-kufi);
 }
 
-/* Glassmorphism effects */
+/* Glassmorphism effects optimized for low-end hardware */
 .glass-panel {
-  background: rgba(15, 23, 42, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(212, 175, 55, 0.15);
+  background: rgba(15, 23, 42, 0.88);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+@supports (backdrop-filter: blur(4px)) {
+  .glass-panel {
+    background: rgba(15, 23, 42, 0.78);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
 }
 
 .light .glass-panel {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(180, 140, 30, 0.2);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(180, 140, 30, 0.25);
+  transform: translateZ(0);
 }
 
 .glass-card {
-  background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(15, 23, 42, 0.8) 100%);
-  border: 1px solid rgba(212, 175, 55, 0.12);
-  backdrop-filter: blur(8px);
+  background: rgba(30, 41, 59, 0.85);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  transform: translateZ(0);
+}
+
+@supports (backdrop-filter: blur(4px)) {
+  .glass-card {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.85) 100%);
+    backdrop-filter: blur(4px);
+  }
 }
 
 .light .glass-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.95) 100%);
+  background: rgba(255, 255, 255, 0.95);
   border: 1px solid rgba(180, 140, 30, 0.2);
 }
 
 /* Islamic Geometric Subtle Background Pattern */
 .bg-islamic-pattern {
-  background-image: radial-gradient(rgba(212, 175, 55, 0.08) 1px, transparent 0),
-                    radial-gradient(rgba(212, 175, 55, 0.05) 1px, transparent 0);
-  background-size: 32px 32px;
-  background-position: 0 0, 16px 16px;
+  background-image: radial-gradient(rgba(212, 175, 55, 0.08) 1px, transparent 0);
+  background-size: 24px 24px;
 }
 
 .light .bg-islamic-pattern {
-  background-image: radial-gradient(rgba(180, 140, 30, 0.08) 1px, transparent 0),
-                    radial-gradient(rgba(180, 140, 30, 0.05) 1px, transparent 0);
-  background-size: 32px 32px;
-  background-position: 0 0, 16px 16px;
+  background-image: radial-gradient(rgba(180, 140, 30, 0.08) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Smooth GPU accelerated transitions */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {

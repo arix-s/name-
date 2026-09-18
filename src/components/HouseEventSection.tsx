@@ -1,18 +1,18 @@
 import React from 'react';
 import { HOUSE_EVENTS_RESEARCH_DATA } from '../data/houseEventsDetails';
-import { ShieldCheck, BookOpen, Scale, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, Scale, CheckCircle2, ScrollText, BookOpen } from 'lucide-react';
 
 export const HouseEventSection: React.FC = () => {
   const d = HOUSE_EVENTS_RESEARCH_DATA;
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-12 animate-fadeIn">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-12 animate-fadeIn space-y-12">
       
       {/* Header */}
-      <div className="text-center max-w-3xl mx-auto mb-10">
+      <div className="text-center max-w-3xl mx-auto">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold mb-4">
           <ShieldCheck className="w-4 h-4 text-amber-400" />
-          <span>توثيق محايد ونظيف</span>
+          <span>الأسانيد والتاريخ</span>
         </div>
         <h1 className="font-amiri text-4xl sm:text-5xl font-bold text-slate-100 mb-3">
           {d.title}
@@ -26,7 +26,7 @@ export const HouseEventSection: React.FC = () => {
       </div>
 
       {/* Narrative Split */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
         {/* Imami Narrative */}
         <div className="glass-card rounded-3xl p-6 border border-emerald-500/30 bg-gradient-to-b from-emerald-950/20 to-slate-900/60 shadow-xl space-y-4">
@@ -35,7 +35,7 @@ export const HouseEventSection: React.FC = () => {
               إمامي
             </div>
             <h2 className="font-amiri text-2xl font-bold text-emerald-300">
-              الرواية الإمامية
+              الرواية الإمامية والدلائل الحديثية
             </h2>
           </div>
 
@@ -52,6 +52,27 @@ export const HouseEventSection: React.FC = () => {
               </li>
             ))}
           </ul>
+
+          {/* Proofs */}
+          <div className="pt-3 space-y-3">
+            <h4 className="text-xs font-bold text-amber-300 flex items-center gap-1.5">
+              <ScrollText className="w-4 h-4 text-amber-400" />
+              <span>أهم المصادر والأسانيد الشيعية:</span>
+            </h4>
+            <div className="space-y-2">
+              {d.imamiNarrative.proofsAndHadiths.map((p, i) => (
+                <div key={i} className="p-3 rounded-xl bg-slate-950/80 border border-emerald-500/20 text-xs space-y-1">
+                  <div className="flex items-center justify-between font-bold text-amber-300">
+                    <span>{p.book}</span>
+                    <span className="text-[10px] text-emerald-400 font-mono">{p.grading}</span>
+                  </div>
+                  <blockquote className="font-amiri text-slate-200 text-sm leading-relaxed border-r-2 border-amber-400 pr-2">
+                    {p.text}
+                  </blockquote>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Sunni Narrative */}
@@ -61,7 +82,7 @@ export const HouseEventSection: React.FC = () => {
               سني
             </div>
             <h2 className="font-amiri text-2xl font-bold text-amber-300">
-              الروايات والتفريق السني
+              التوثيق التاريخي في كتب المتقدمين
             </h2>
           </div>
 
@@ -69,7 +90,7 @@ export const HouseEventSection: React.FC = () => {
             {d.sunniNarrative.summary}
           </p>
 
-          <h3 className="font-bold text-xs text-emerald-400 uppercase">ما هو ثابت ومستفيض سندياً عند السنة:</h3>
+          <h3 className="font-bold text-xs text-emerald-400 uppercase">ما هو ثابت ومستفيض سندياً:</h3>
           <ul className="space-y-1.5 text-xs text-slate-200">
             {d.sunniNarrative.authenticElements.map((item, idx) => (
               <li key={idx} className="flex items-start gap-2 bg-slate-900/60 p-2.5 rounded-lg border border-emerald-500/20">
@@ -79,11 +100,11 @@ export const HouseEventSection: React.FC = () => {
             ))}
           </ul>
 
-          <h3 className="font-bold text-xs text-amber-400 uppercase pt-2">الروايات الضعيفة أو غير المعتمَدة سندياً عندهم:</h3>
+          <h3 className="font-bold text-xs text-amber-400 uppercase pt-2">شواهد تاريخية أخرى:</h3>
           <ul className="space-y-1.5 text-xs text-slate-200">
-            {d.sunniNarrative.weakHistoricalElements.map((item, idx) => (
+            {d.sunniNarrative.historicalQuotes.map((item, idx) => (
               <li key={idx} className="flex items-start gap-2 bg-slate-900/60 p-2.5 rounded-lg border border-amber-500/20">
-                <AlertCircle className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
+                <BookOpen className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
                 <span>{item}</span>
               </li>
             ))}
@@ -96,7 +117,7 @@ export const HouseEventSection: React.FC = () => {
       <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-amber-500/40 bg-gradient-to-r from-amber-500/10 via-slate-900 to-amber-500/10 text-center shadow-2xl">
         <div className="flex items-center justify-center gap-2 text-amber-400 font-bold text-sm mb-3">
           <Scale className="w-5 h-5" />
-          <span>خلاصة الباحث المحايدة (بدون صياغة تحريضية أو دموية)</span>
+          <span>خلاصة البحث التوثيقي</span>
         </div>
         <blockquote className="font-amiri text-xl sm:text-2xl font-bold text-amber-200 leading-relaxed">
           "{d.researcherConclusion}"
